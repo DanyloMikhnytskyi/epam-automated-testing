@@ -1,4 +1,4 @@
-const Page = require("./page.js");
+const Page = require("../base/page.js");
 
 class LoginPage extends Page {
   get inputUsername() {

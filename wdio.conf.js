@@ -1,11 +1,9 @@
 exports.config = {
-  // automationProtocol: "webdriver",
-
   runner: "local",
-  specs: ["./features/**/*.feature"],
+  specs: ["./src/features/**/*.feature"],
   maxInstances: 2,
 
-  // services: ["geckodriver", "edgedriver"],
+  services: ["geckodriver"],
 
   capabilities: [
     {
@@ -36,7 +34,7 @@ exports.config = {
   framework: "cucumber",
   reporters: ["spec"],
   cucumberOpts: {
-    require: ["./features/step-definitions/steps.js"],
+    require: ["./src/support/step-definitions/steps.js"],
     backtrace: false,
     requireModule: [],
     dryRun: false,

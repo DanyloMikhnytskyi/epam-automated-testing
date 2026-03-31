@@ -1,15 +1,19 @@
 const { Given, When, Then } = require("@wdio/cucumber-framework");
 const { expect } = require("chai");
-const LoginPage = require("../pageobjects/login.page.js");
-const InventoryPage = require("../pageobjects/inventory.page.js");
+const { LoginPage, InventoryPage } = require("../pom/index.js");
 const logger = require("../../utils/logger.js");
 
 Given(/^I am logged in as a standard user$/, async () => {
   logger.info("Navigating to login page");
 
-  await browser.reloadSession();
-
   await LoginPage.open();
+
+  await browser.execute(() => window.localStorage.clear());
+  await browser.execute(() => window.sessionStorage.clear());
+  await browser.deleteCookies();
+
+  await browser.refresh();
+
   logger.info("Logging in with standard_user");
   await LoginPage.login("standard_user", "secret_sauce");
 });

@@ -1,5 +1,5 @@
-const Page = require("./page.js");
-const logger = require("../../utils/logger.js");
+const Page = require("../base/page.js");
+const logger = require("../../../utils/logger.js");
 
 class InventoryPage extends Page {
   get sortDropdown() {
