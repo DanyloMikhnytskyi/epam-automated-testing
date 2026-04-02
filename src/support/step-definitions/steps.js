@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const { LoginPage, InventoryPage } = require("../pom/index.js");
 const logger = require("../../utils/logger.js");
 
-Given(/^I am logged in as a standard user$/, async () => {
+Given(/^I am logged in(?: as a (.*) user)?$/, async (userType) => {
   logger.info("Navigating to login page");
 
   await LoginPage.open();
@@ -14,8 +14,9 @@ Given(/^I am logged in as a standard user$/, async () => {
 
   await browser.refresh();
 
-  logger.info("Logging in with standard_user");
-  await LoginPage.login("standard_user", "secret_sauce");
+  const typeToLog = userType || "standard";
+  logger.info(`Logging in with ${typeToLog} user`);
+  await LoginPage.login(typeToLog);
 });
 
 When(/^I sort the items by "([^"]*)"$/, async (sortOption) => {

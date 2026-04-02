@@ -1,7 +1,7 @@
 Feature: Inventory Logic
 
   Background:
-    Given I am logged in as a standard user
+    Given I am logged in
 
   Scenario: UC-1 Sorting Validation
     Then I should not see the items sorted by price in ascending order
