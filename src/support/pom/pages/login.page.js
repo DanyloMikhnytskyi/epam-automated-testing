@@ -2,13 +2,13 @@ const Page = require("../base/page.js");
 
 class LoginPage extends Page {
   get inputUsername() {
-    return $("//input[@placeholder='Username']");
+    return $("input[data-test='username']");
   }
   get inputPassword() {
-    return $("//input[@placeholder='Password']");
+    return $("input[data-test='password']");
   }
   get btnLogin() {
-    return $("//input[@type='submit']");
+    return $("input[data-test='login-button']");
   }
 
   async login(username, password) {

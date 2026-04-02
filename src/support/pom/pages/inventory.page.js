@@ -3,13 +3,15 @@ const logger = require("../../../utils/logger.js");
 
 class InventoryPage extends Page {
   get sortDropdown() {
-    return $("//select[@class='product_sort_container']");
+    return $("select[data-test='product-sort-container']");
   }
   get itemPrices() {
-    return $$("//div[@class='inventory_item_price']");
+    return $$("div[data-test='inventory-item-price']");
   }
   get cartBadge() {
-    return $("//span[@class='shopping_cart_badge']");
+    return $(
+      "a[data-test='shopping-cart-link'] span[data-test='shopping-cart-badge']"
+    );
   }
 
   async selectSortOption(visibleText) {
@@ -33,9 +35,11 @@ class InventoryPage extends Page {
   async clickButtonForItem(itemName, actionText) {
     logger.info(`Clicking '${actionText}' for item: ${itemName}`);
 
-    const xpath = `//div[contains(text(), '${itemName}')]/ancestor::div[contains(@class, 'inventory_item')]//button[contains(text(), '${actionText}')]`;
+    const actionPrefix = actionText.toLowerCase().replace(/ /g, "-");
+    const itemSuffix = itemName.toLowerCase().replace(/ /g, "-");
+    const dataTestId = `${actionPrefix}-${itemSuffix}`;
 
-    const button = await $(xpath);
+    const button = await $(`button[data-test='${dataTestId}']`);
     await button.waitForClickable();
     await button.click();
   }
