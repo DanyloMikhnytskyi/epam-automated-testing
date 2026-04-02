@@ -27,9 +27,7 @@ class LoginPage extends Page {
   }
 
   async login(userType = "standard", password = DEFAULT_PASSWORD) {
-    // Convert e.g. "locked out" or "locked_out" to "LOCKED_OUT"
     const key = userType.toUpperCase().replace(/\s+/g, "_");
-    // Fallback to standard_user if the key doesn't match our USERS definition
     const actualUsername = USERS[key] || USERS.STANDARD;
 
     await this.inputUsername.setValue(actualUsername);
