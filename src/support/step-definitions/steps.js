@@ -23,18 +23,25 @@ When(/^I sort the items by "([^"]*)"$/, async (sortOption) => {
 });
 
 Then(
-  /^I should see the items sorted by price in ascending order$/,
-  async () => {
+  /^I should( not)? see the items sorted by price in ascending order$/,
+  async (notFlag) => {
     const actualPrices = await InventoryPage.getPricesAsNumbers();
     const expectedSortedPrices = [...actualPrices].sort((a, b) => a - b);
 
     logger.info(`Actual Scraped Prices: ${actualPrices}`);
     logger.info(`Expected Sorted Prices: ${expectedSortedPrices}`);
 
-    expect(actualPrices).to.deep.equal(
-      expectedSortedPrices,
-      "Items are not sorted correctly by price!"
-    );
+    if (notFlag) {
+      expect(actualPrices).to.not.deep.equal(
+        expectedSortedPrices,
+        "Items were unexpectedly sorted correctly by price!"
+      );
+    } else {
+      expect(actualPrices).to.deep.equal(
+        expectedSortedPrices,
+        "Items are not sorted correctly by price!"
+      );
+    }
   }
 );
 

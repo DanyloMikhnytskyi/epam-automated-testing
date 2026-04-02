@@ -13,6 +13,7 @@ module.exports = [
       sourceType: "commonjs",
       globals: {
         ...globals.node,
+        ...globals.browser,
         browser: "readonly",
         $: "readonly",
         $$: "readonly",

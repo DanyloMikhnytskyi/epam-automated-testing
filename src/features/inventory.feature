@@ -4,6 +4,7 @@ Feature: Inventory Logic
     Given I am logged in as a standard user
 
   Scenario: UC-1 Sorting Validation
+    Then I should not see the items sorted by price in ascending order
     When I sort the items by "Price (low to high)"
     Then I should see the items sorted by price in ascending order
 
