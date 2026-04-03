@@ -1,7 +1,9 @@
 Feature: Inventory Logic
 
   Background:
-    Given I am logged in
+  
+   # Available options from your dictionary: standard, locked out, problem, performance glitch, error, visual
+    Given I am logged in as a standard user
 
   Scenario: UC-1 Sorting Validation
     Then I should not see the items sorted by price in ascending order
